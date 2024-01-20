@@ -7,5 +7,5 @@ make help
 
 - Run all tests
 ```BASH
-make or make test
+make test  # or only make
 ```
