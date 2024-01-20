@@ -11,11 +11,13 @@ RUN adduser --disabled-password --gecos "" --shell "/sbin/nologin" --no-create-h
   /etc/group \
   /etc/ssl/certs/ca-certificates.crt
 
-COPY go.mod ./
+COPY go.mod go.sum ./
 
 RUN go mod download
 
 COPY cmd ./cmd
+
+COPY internal ./internal
 
 RUN mkdir -p bin && \
   cd cmd/virtualbookstore && \

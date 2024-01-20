@@ -1,6 +1,11 @@
 # Virtual Bookstore
 
-- Run with docker
+- To see help for all project commands run
 ```BASH
-make OR make run/docker
+make help
+```
+
+- Run all tests
+```BASH
+make or make test
 ```
