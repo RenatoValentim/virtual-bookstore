@@ -2,11 +2,9 @@ package usecases
 
 import (
 	"errors"
-	"time"
 
 	db_contracts "github.com/RenatoValentim/virtual-bookstore/internal/db/contracts"
-	"github.com/badoux/checkmail"
-	"github.com/spf13/viper"
+	"github.com/RenatoValentim/virtual-bookstore/internal/validation"
 )
 
 type registerAuthor struct {
@@ -20,25 +18,13 @@ func NewRegisterAuthor(authorData db_contracts.AuthorData) *registerAuthor {
 }
 
 func (ra *registerAuthor) validate(author *db_contracts.Author) error {
-	if author.CreatedAt == "" {
-		return errors.New("A CreatAt field is required.")
-	}
-	_, err := time.Parse(time.RFC3339, author.CreatedAt)
+	err := validation.DateValidation(author.CreatedAt)
 	if err != nil {
 		return err
 	}
-	if author.Email == "" {
-		return errors.New("An Email field is required.")
-	}
-	err = checkmail.ValidateFormat(author.Email)
+	err = validation.EmailValitation(author.Email)
 	if err != nil {
 		return err
-	}
-	if viper.GetString("environment") == "prod" {
-		err = checkmail.ValidateHost(author.Email)
-		if err != nil {
-			return err
-		}
 	}
 	if author.Name == "" {
 		return errors.New("A Name field is required.")
