@@ -23,6 +23,9 @@ func (ra *registerAuthor) Execute(author *db_contracts.Author) error {
 	if author.Email == "" {
 		return errors.New("An Email field is required.")
 	}
+	if author.Name == "" {
+		return errors.New("An Name field is required.")
+	}
 	ra.authorData.Register(author)
 	return nil
 }
