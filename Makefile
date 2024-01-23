@@ -1,6 +1,6 @@
 .PHONY: help run/docker test
 
-all: test
+all: build/docker test
 
 APP = virtualbookstore
 
