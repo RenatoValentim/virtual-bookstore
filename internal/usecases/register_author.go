@@ -1,6 +1,8 @@
 package usecases
 
 import (
+	"errors"
+
 	db_contracts "github.com/RenatoValentim/virtual-bookstore/internal/db/contracts"
 )
 
@@ -15,6 +17,9 @@ func NewRegisterAuthor(authorData db_contracts.AuthorData) *registerAuthor {
 }
 
 func (ra *registerAuthor) Execute(author *db_contracts.Author) error {
+	if author.CreatAt == "" {
+		return errors.New("A CreatAt field is required.")
+	}
 	ra.authorData.Register(author)
 	return nil
 }

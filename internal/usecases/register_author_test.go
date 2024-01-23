@@ -27,6 +27,7 @@ func TestRegisterAuthor(t *testing.T) {
 			Description: "This is a fake description",
 			CreatAt:     "2024-01-01 10:00:00 Local",
 		}
+
 		var authorDataFake AuthorDataSpy
 
 		registerAuthor := usecases.NewRegisterAuthor(&authorDataFake)
@@ -37,5 +38,20 @@ func TestRegisterAuthor(t *testing.T) {
 		assert.Equal(authorDataFake.author.Email, input.Email)
 		assert.Equal(authorDataFake.author.Description, input.Description)
 		assert.Equal(authorDataFake.author.CreatAt, input.CreatAt)
+	})
+
+	t.Run(`Should not register a new author if don't have a CreatAt field`, func(t *testing.T) {
+		input := db_contracts.Author{
+			Name:        "John Doe",
+			Email:       "johndoe@example.com",
+			Description: "This is a fake description",
+			CreatAt:     "",
+		}
+		var authorDataFake AuthorDataSpy
+
+		registerAuthor := usecases.NewRegisterAuthor(&authorDataFake)
+		err := registerAuthor.Execute(&input)
+
+		assert.NotNil(err)
 	})
 }
