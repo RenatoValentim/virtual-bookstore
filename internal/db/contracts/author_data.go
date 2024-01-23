@@ -4,7 +4,7 @@ type Author struct {
 	Name        string `json:"name"`
 	Email       string `json:"email"`
 	Description string `json:"description"`
-	CreatAt     string `json:"creat_at"`
+	CreatedAt   string `json:"created_at"`
 }
 
 type AuthorData interface {

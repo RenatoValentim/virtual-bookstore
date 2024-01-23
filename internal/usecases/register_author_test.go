@@ -25,7 +25,7 @@ func TestRegisterAuthor(t *testing.T) {
 			Name:        "John Doe",
 			Email:       "johndoe@example.com",
 			Description: "This is a fake description",
-			CreatAt:     "2024-01-01 10:00:00 Local",
+			CreatedAt:   "2024-01-01T10:00:00Z",
 		}
 
 		var authorDataFake AuthorDataSpy
@@ -37,7 +37,7 @@ func TestRegisterAuthor(t *testing.T) {
 		assert.Equal(authorDataFake.author.Name, input.Name)
 		assert.Equal(authorDataFake.author.Email, input.Email)
 		assert.Equal(authorDataFake.author.Description, input.Description)
-		assert.Equal(authorDataFake.author.CreatAt, input.CreatAt)
+		assert.Equal(authorDataFake.author.CreatedAt, input.CreatedAt)
 	})
 
 	t.Run(`Should not register a new author if don't have a CreatAt field`, func(t *testing.T) {
@@ -45,7 +45,22 @@ func TestRegisterAuthor(t *testing.T) {
 			Name:        "John Doe",
 			Email:       "johndoe@example.com",
 			Description: "This is a fake description",
-			CreatAt:     "",
+			CreatedAt:   "",
+		}
+		var authorDataFake AuthorDataSpy
+
+		registerAuthor := usecases.NewRegisterAuthor(&authorDataFake)
+		err := registerAuthor.Execute(&input)
+
+		assert.NotNil(err)
+	})
+
+	t.Run(`Should not register a new author if don't have a valid date`, func(t *testing.T) {
+		input := db_contracts.Author{
+			Name:        "John Doe",
+			Email:       "johndoe@example.com",
+			Description: "This is a fake description",
+			CreatedAt:   "2024-25-01T10:00:00Z",
 		}
 		var authorDataFake AuthorDataSpy
 
@@ -60,7 +75,7 @@ func TestRegisterAuthor(t *testing.T) {
 			Name:        "John Doe",
 			Email:       "",
 			Description: "This is a fake description",
-			CreatAt:     "2024-01-01 10:00:00 Local",
+			CreatedAt:   "2024-01-01T10:00:00Z",
 		}
 		var authorDataFake AuthorDataSpy
 
@@ -75,7 +90,7 @@ func TestRegisterAuthor(t *testing.T) {
 			Name:        "",
 			Email:       "johndoe@example.com",
 			Description: "This is a fake description",
-			CreatAt:     "2024-01-01 10:00:00 Local",
+			CreatedAt:   "2024-01-01T10:00:00Z",
 		}
 		var authorDataFake AuthorDataSpy
 
@@ -90,7 +105,7 @@ func TestRegisterAuthor(t *testing.T) {
 			Name:        "John Doe",
 			Email:       "johndoe@example.com",
 			Description: "",
-			CreatAt:     "2024-01-01 10:00:00 Local",
+			CreatedAt:   "2024-01-01T10:00:00Z",
 		}
 		var authorDataFake AuthorDataSpy
 
