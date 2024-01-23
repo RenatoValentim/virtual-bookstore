@@ -54,4 +54,19 @@ func TestRegisterAuthor(t *testing.T) {
 
 		assert.NotNil(err)
 	})
+
+	t.Run(`Should not register a new author if don't have a email field`, func(t *testing.T) {
+		input := db_contracts.Author{
+			Name:        "John Doe",
+			Email:       "",
+			Description: "This is a fake description",
+			CreatAt:     "2024-01-01 10:00:00 Local",
+		}
+		var authorDataFake AuthorDataSpy
+
+		registerAuthor := usecases.NewRegisterAuthor(&authorDataFake)
+		err := registerAuthor.Execute(&input)
+
+		assert.NotNil(err)
+	})
 }
