@@ -3,16 +3,16 @@ package usecases_test
 import (
 	"testing"
 
-	db_contracts "github.com/RenatoValentim/virtual-bookstore/internal/db/contracts"
+	"github.com/RenatoValentim/virtual-bookstore/internal/dto"
 	"github.com/RenatoValentim/virtual-bookstore/internal/usecases"
 	"github.com/stretchr/testify/assert"
 )
 
 type AuthorDataSpy struct {
-	author *db_contracts.Author
+	author *dto.Author
 }
 
-func (a *AuthorDataSpy) Register(author *db_contracts.Author) error {
+func (a *AuthorDataSpy) Register(author *dto.Author) error {
 	a.author = author
 	return nil
 }
@@ -21,7 +21,7 @@ func TestRegisterAuthor(t *testing.T) {
 	assert := assert.New(t)
 
 	t.Run(`Should register a new author`, func(t *testing.T) {
-		input := db_contracts.Author{
+		input := dto.Author{
 			Name:        "John Doe",
 			Email:       "johndoe@example.com",
 			Description: "This is a fake description",
@@ -41,7 +41,7 @@ func TestRegisterAuthor(t *testing.T) {
 	})
 
 	t.Run(`Should not register a new author if don't have a CreatAt field`, func(t *testing.T) {
-		input := db_contracts.Author{
+		input := dto.Author{
 			Name:        "John Doe",
 			Email:       "johndoe@example.com",
 			Description: "This is a fake description",
@@ -56,7 +56,7 @@ func TestRegisterAuthor(t *testing.T) {
 	})
 
 	t.Run(`Should not register a new author if don't have a valid date`, func(t *testing.T) {
-		input := db_contracts.Author{
+		input := dto.Author{
 			Name:        "John Doe",
 			Email:       "johndoe@example.com",
 			Description: "This is a fake description",
@@ -71,7 +71,7 @@ func TestRegisterAuthor(t *testing.T) {
 	})
 
 	t.Run(`Should not register a new author if don't have a email field`, func(t *testing.T) {
-		input := db_contracts.Author{
+		input := dto.Author{
 			Name:        "John Doe",
 			Email:       "",
 			Description: "This is a fake description",
@@ -86,7 +86,7 @@ func TestRegisterAuthor(t *testing.T) {
 	})
 
 	t.Run(`Should not register a new author if don't have a valid email`, func(t *testing.T) {
-		input := db_contracts.Author{
+		input := dto.Author{
 			Name:        "John Doe",
 			Email:       "ç$€§/az@example.com",
 			Description: "This is a fake description",
@@ -101,7 +101,7 @@ func TestRegisterAuthor(t *testing.T) {
 	})
 
 	t.Run(`Should not register a new author if don't have a name field`, func(t *testing.T) {
-		input := db_contracts.Author{
+		input := dto.Author{
 			Name:        "",
 			Email:       "johndoe@example.com",
 			Description: "This is a fake description",
@@ -116,7 +116,7 @@ func TestRegisterAuthor(t *testing.T) {
 	})
 
 	t.Run(`Should not register a new author if don't have a description field`, func(t *testing.T) {
-		input := db_contracts.Author{
+		input := dto.Author{
 			Name:        "John Doe",
 			Email:       "johndoe@example.com",
 			Description: "",
@@ -139,7 +139,7 @@ func TestRegisterAuthor(t *testing.T) {
 		duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris
 		ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis
 		sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.`
-		input := db_contracts.Author{
+		input := dto.Author{
 			Name:        "John Doe",
 			Email:       "johndoe@example.com",
 			Description: desc,

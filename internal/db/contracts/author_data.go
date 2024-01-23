@@ -1,12 +1,7 @@
 package contracts
 
-type Author struct {
-	Name        string `json:"name"`
-	Email       string `json:"email"`
-	Description string `json:"description"`
-	CreatedAt   string `json:"created_at"`
-}
+import "github.com/RenatoValentim/virtual-bookstore/internal/dto"
 
 type AuthorData interface {
-	Register(author *Author) error
+	Register(author *dto.Author) error
 }
