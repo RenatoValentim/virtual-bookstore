@@ -130,7 +130,7 @@ func TestRegisterAuthor(t *testing.T) {
 		assert.NotNil(err)
 	})
 
-	t.Run(`Should not register a new author if don't have a description field`, func(t *testing.T) {
+	t.Run(`Should not register a new author if the description field is greater than 400`, func(t *testing.T) {
 		desc := `Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore
 		culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat
 		excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate
