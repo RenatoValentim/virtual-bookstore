@@ -22,7 +22,7 @@ run/docker: build/docker ## Run project with docker
 test: ## Run all tests
 	@go test -v -failfast -cover ./internal/...
 
-repl: ## Evaluate Golang expressons using REPL (Read-Eval-Print-Loop)
+repl: ## Evaluate Golang expressions using REPL (Read-Eval-Print-Loop)
 	@if type gore >/dev/null 2>&1 ; then gore; \
 		else echo "SKIPPED. Run 'go install github.com/x-motemen/gore/cmd/gore@latest' and 'go install github.com/mdempsky/gocode@latest' first." >&2; \
 	fi
