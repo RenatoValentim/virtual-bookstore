@@ -19,6 +19,7 @@ func (a *AuthorDataSpy) Register(author *dto.Author) error {
 
 func TestRegisterAuthor(t *testing.T) {
 	assert := assert.New(t)
+	var authorDataFake AuthorDataSpy
 
 	t.Run(`Should register a new author`, func(t *testing.T) {
 		input := dto.Author{
@@ -27,8 +28,6 @@ func TestRegisterAuthor(t *testing.T) {
 			Description: "This is a fake description",
 			CreatedAt:   "2024-01-01T10:00:00Z",
 		}
-
-		var authorDataFake AuthorDataSpy
 
 		registerAuthor := usecases.NewRegisterAuthor(&authorDataFake)
 		err := registerAuthor.Execute(&input)
@@ -47,7 +46,6 @@ func TestRegisterAuthor(t *testing.T) {
 			Description: "This is a fake description",
 			CreatedAt:   "",
 		}
-		var authorDataFake AuthorDataSpy
 
 		registerAuthor := usecases.NewRegisterAuthor(&authorDataFake)
 		err := registerAuthor.Execute(&input)
@@ -62,7 +60,6 @@ func TestRegisterAuthor(t *testing.T) {
 			Description: "This is a fake description",
 			CreatedAt:   "2024-25-01T10:00:00Z",
 		}
-		var authorDataFake AuthorDataSpy
 
 		registerAuthor := usecases.NewRegisterAuthor(&authorDataFake)
 		err := registerAuthor.Execute(&input)
@@ -77,7 +74,6 @@ func TestRegisterAuthor(t *testing.T) {
 			Description: "This is a fake description",
 			CreatedAt:   "2024-01-01T10:00:00Z",
 		}
-		var authorDataFake AuthorDataSpy
 
 		registerAuthor := usecases.NewRegisterAuthor(&authorDataFake)
 		err := registerAuthor.Execute(&input)
@@ -92,7 +88,6 @@ func TestRegisterAuthor(t *testing.T) {
 			Description: "This is a fake description",
 			CreatedAt:   "2024-01-01T10:00:00Z",
 		}
-		var authorDataFake AuthorDataSpy
 
 		registerAuthor := usecases.NewRegisterAuthor(&authorDataFake)
 		err := registerAuthor.Execute(&input)
@@ -107,7 +102,6 @@ func TestRegisterAuthor(t *testing.T) {
 			Description: "This is a fake description",
 			CreatedAt:   "2024-01-01T10:00:00Z",
 		}
-		var authorDataFake AuthorDataSpy
 
 		registerAuthor := usecases.NewRegisterAuthor(&authorDataFake)
 		err := registerAuthor.Execute(&input)
@@ -122,7 +116,6 @@ func TestRegisterAuthor(t *testing.T) {
 			Description: "",
 			CreatedAt:   "2024-01-01T10:00:00Z",
 		}
-		var authorDataFake AuthorDataSpy
 
 		registerAuthor := usecases.NewRegisterAuthor(&authorDataFake)
 		err := registerAuthor.Execute(&input)
@@ -145,7 +138,6 @@ func TestRegisterAuthor(t *testing.T) {
 			Description: desc,
 			CreatedAt:   "2024-01-01T10:00:00Z",
 		}
-		var authorDataFake AuthorDataSpy
 
 		registerAuthor := usecases.NewRegisterAuthor(&authorDataFake)
 		err := registerAuthor.Execute(&input)
