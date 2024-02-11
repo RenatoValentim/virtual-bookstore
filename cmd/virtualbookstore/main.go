@@ -1,3 +1,7 @@
 package main
 
-func main() {}
+import "github.com/RenatoValentim/virtual-bookstore/internal/api/rest"
+
+func main() {
+	rest.LoadRoutes()
+}

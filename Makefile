@@ -17,7 +17,7 @@ build/docker: ## Build project with docker
 	 @DOCKER_BUILDKIT=1 docker build -t $(APP) .
 
 run/docker: build/docker ## Run project with docker
-	@docker run --rm --name $(APP) $(APP)
+	@docker run --rm -p $(port):$(port) --name $(APP) $(APP)
 
 test: ## Run all tests
 	@go test -v -failfast -cover ./internal/...
