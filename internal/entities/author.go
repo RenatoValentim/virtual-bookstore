@@ -1,4 +1,4 @@
-package dto
+package entities
 
 type Author struct {
 	Name        string `json:"name"`

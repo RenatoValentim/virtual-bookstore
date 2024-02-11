@@ -3,16 +3,16 @@ package usecases_test
 import (
 	"testing"
 
-	"github.com/RenatoValentim/virtual-bookstore/internal/dto"
+	"github.com/RenatoValentim/virtual-bookstore/internal/entities"
 	"github.com/RenatoValentim/virtual-bookstore/internal/usecases"
 	"github.com/stretchr/testify/assert"
 )
 
 type AuthorDataSpy struct {
-	author *dto.Author
+	author *entities.Author
 }
 
-func (a *AuthorDataSpy) Register(author *dto.Author) error {
+func (a *AuthorDataSpy) Register(author *entities.Author) error {
 	a.author = author
 	return nil
 }
@@ -22,7 +22,7 @@ func TestRegisterAuthor(t *testing.T) {
 	var authorDataFake AuthorDataSpy
 
 	t.Run(`Should register a new author`, func(t *testing.T) {
-		input := dto.Author{
+		input := entities.Author{
 			Name:        "John Doe",
 			Email:       "johndoe@example.com",
 			Description: "This is a fake description",
@@ -40,7 +40,7 @@ func TestRegisterAuthor(t *testing.T) {
 	})
 
 	t.Run(`Should not register a new author if don't have a CreatAt field`, func(t *testing.T) {
-		input := dto.Author{
+		input := entities.Author{
 			Name:        "John Doe",
 			Email:       "johndoe@example.com",
 			Description: "This is a fake description",
@@ -54,7 +54,7 @@ func TestRegisterAuthor(t *testing.T) {
 	})
 
 	t.Run(`Should not register a new author if don't have a valid date`, func(t *testing.T) {
-		input := dto.Author{
+		input := entities.Author{
 			Name:        "John Doe",
 			Email:       "johndoe@example.com",
 			Description: "This is a fake description",
@@ -68,7 +68,7 @@ func TestRegisterAuthor(t *testing.T) {
 	})
 
 	t.Run(`Should not register a new author if don't have a email field`, func(t *testing.T) {
-		input := dto.Author{
+		input := entities.Author{
 			Name:        "John Doe",
 			Email:       "",
 			Description: "This is a fake description",
@@ -82,7 +82,7 @@ func TestRegisterAuthor(t *testing.T) {
 	})
 
 	t.Run(`Should not register a new author if don't have a valid email`, func(t *testing.T) {
-		input := dto.Author{
+		input := entities.Author{
 			Name:        "John Doe",
 			Email:       "ç$€§/az@example.com",
 			Description: "This is a fake description",
@@ -96,7 +96,7 @@ func TestRegisterAuthor(t *testing.T) {
 	})
 
 	t.Run(`Should not register a new author if don't have a name field`, func(t *testing.T) {
-		input := dto.Author{
+		input := entities.Author{
 			Name:        "",
 			Email:       "johndoe@example.com",
 			Description: "This is a fake description",
@@ -110,7 +110,7 @@ func TestRegisterAuthor(t *testing.T) {
 	})
 
 	t.Run(`Should not register a new author if don't have a description field`, func(t *testing.T) {
-		input := dto.Author{
+		input := entities.Author{
 			Name:        "John Doe",
 			Email:       "johndoe@example.com",
 			Description: "",
@@ -132,7 +132,7 @@ func TestRegisterAuthor(t *testing.T) {
 		duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris
 		ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis
 		sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.`
-		input := dto.Author{
+		input := entities.Author{
 			Name:        "John Doe",
 			Email:       "johndoe@example.com",
 			Description: desc,

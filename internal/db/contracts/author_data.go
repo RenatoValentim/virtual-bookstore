@@ -1,7 +1,7 @@
 package contracts
 
-import "github.com/RenatoValentim/virtual-bookstore/internal/dto"
+import "github.com/RenatoValentim/virtual-bookstore/internal/entities"
 
 type AuthorData interface {
-	Register(author *dto.Author) error
+	Register(author *entities.Author) error
 }

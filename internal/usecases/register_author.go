@@ -4,7 +4,7 @@ import (
 	"errors"
 
 	db_contracts "github.com/RenatoValentim/virtual-bookstore/internal/db/contracts"
-	"github.com/RenatoValentim/virtual-bookstore/internal/dto"
+	"github.com/RenatoValentim/virtual-bookstore/internal/entities"
 	"github.com/RenatoValentim/virtual-bookstore/internal/validation"
 )
 
@@ -20,7 +20,7 @@ func NewRegisterAuthor(authorData db_contracts.AuthorData) *registerAuthor {
 	}
 }
 
-func (ra *registerAuthor) validate(author *dto.Author) error {
+func (ra *registerAuthor) validate(author *entities.Author) error {
 	err := validation.DateValidation(author.CreatedAt)
 	if err != nil {
 		return err
@@ -41,7 +41,7 @@ func (ra *registerAuthor) validate(author *dto.Author) error {
 	return nil
 }
 
-func (ra *registerAuthor) Execute(author *dto.Author) error {
+func (ra *registerAuthor) Execute(author *entities.Author) error {
 	err := ra.validate(author)
 	if err != nil {
 		return err
