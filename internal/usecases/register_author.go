@@ -3,6 +3,7 @@ package usecases
 import (
 	"errors"
 
+	"github.com/RenatoValentim/virtual-bookstore/internal/api/rest/dto"
 	db_contracts "github.com/RenatoValentim/virtual-bookstore/internal/db/contracts"
 	"github.com/RenatoValentim/virtual-bookstore/internal/entities"
 	"github.com/RenatoValentim/virtual-bookstore/internal/validation"
@@ -20,12 +21,8 @@ func NewRegisterAuthor(authorData db_contracts.AuthorData) *registerAuthor {
 	}
 }
 
-func (ra *registerAuthor) validate(author *entities.Author) error {
-	err := validation.DateValidation(author.CreatedAt)
-	if err != nil {
-		return err
-	}
-	err = validation.EmailValitation(author.Email)
+func (ra *registerAuthor) validate(author *dto.CreateAuthorInput) error {
+	err := validation.EmailValitation(author.Email)
 	if err != nil {
 		return err
 	}
@@ -41,11 +38,15 @@ func (ra *registerAuthor) validate(author *entities.Author) error {
 	return nil
 }
 
-func (ra *registerAuthor) Execute(author *entities.Author) error {
-	err := ra.validate(author)
+func (ra *registerAuthor) Execute(input *dto.CreateAuthorInput) error {
+	err := ra.validate(input)
 	if err != nil {
 		return err
 	}
-	ra.authorData.Register(author)
+	ra.authorData.Register(&entities.Author{
+		Name:        input.Name,
+		Email:       input.Email,
+		Description: input.Description,
+	})
 	return nil
 }

@@ -27,6 +27,10 @@ func LoadRoutes() {
 
 	r.Get("/ping", ping)
 
+	r.Route("/author", func(r chi.Router) {
+		r.Post("/register", registerAuthorHandler)
+	})
+
 	port := 8000
 	log.Printf("API listening on port %v", port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%v", port), r))
