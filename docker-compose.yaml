@@ -1,0 +1,37 @@
+services:
+  api:
+    build: .
+    container_name: virtualbookstore
+    hostname: api
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+  db:
+    environment:
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_DB=${DB_NAME}
+    image: postgres:15.3
+    hostname: db
+    ports:
+      - ${DB_PORT}:5432
+    restart: always
+    # volumes:
+    #   - ./internal/infra/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    tmpfs:
+      - /var/lib/postgresql/data
+
+  adminer:
+    container_name: virtualbookstore-adminer
+    hostname: adminer
+    image: adminer
+    restart: always
+    ports:
+      - ${SGBD_HOST_PORT}:8080
+
+version: '3.15'
+
+volumes:
+  data:
