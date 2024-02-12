@@ -4,12 +4,11 @@ import (
 	"errors"
 
 	"github.com/RenatoValentim/virtual-bookstore/internal/api/rest/dto"
+	"github.com/RenatoValentim/virtual-bookstore/internal/constants"
 	db_contracts "github.com/RenatoValentim/virtual-bookstore/internal/db/contracts"
 	"github.com/RenatoValentim/virtual-bookstore/internal/entities"
 	"github.com/RenatoValentim/virtual-bookstore/internal/validation"
 )
-
-var maxLengthContent = 400
 
 type registerAuthor struct {
 	authorData db_contracts.AuthorData
@@ -32,7 +31,7 @@ func (ra *registerAuthor) validate(author *dto.CreateAuthorInput) error {
 	if author.Description == "" {
 		return errors.New("Description field is required.")
 	}
-	if len(author.Description) > maxLengthContent {
+	if len(author.Description) > constants.MAX_LENGTH_CONTENT {
 		return errors.New("The description field must have a maximum 400 characters.")
 	}
 	return nil

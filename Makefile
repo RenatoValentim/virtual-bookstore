@@ -20,7 +20,7 @@ run/docker: build/docker ## Run project with docker
 	@docker run --rm -p $(port):$(port) --name $(APP) $(APP)
 
 test: ## Run all tests
-	@go test -v -failfast -cover ./internal/...
+	@go test -v -failfast -cover ./internal/... | grep -vE '^?.*\[no test files]'
 
 repl: ## Evaluate Golang expressions using REPL (Read-Eval-Print-Loop)
 	@if type gore >/dev/null 2>&1 ; then gore; \

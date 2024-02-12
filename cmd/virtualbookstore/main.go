@@ -1,7 +1,12 @@
 package main
 
-import "github.com/RenatoValentim/virtual-bookstore/internal/api/rest"
+import (
+	"github.com/RenatoValentim/virtual-bookstore/internal/api/rest"
+	"github.com/RenatoValentim/virtual-bookstore/internal/config"
+)
 
 func main() {
-	rest.LoadRoutes()
+	config.LoadConfig()
+	routes := rest.LoadRoutes()
+	rest.StartServer(routes)
 }

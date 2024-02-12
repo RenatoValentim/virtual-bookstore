@@ -2,10 +2,10 @@ package rest
 
 import (
 	"encoding/json"
-	"fmt"
-	"log"
 	"net/http"
 
+	"github.com/RenatoValentim/virtual-bookstore/internal/api/rest/handlers"
+	"github.com/RenatoValentim/virtual-bookstore/internal/api/rest/middlewares"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 )
@@ -18,7 +18,7 @@ func ping(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func LoadRoutes() {
+func LoadRoutes() *chi.Mux {
 	r := chi.NewRouter()
 	r.Use(middleware.RequestID)
 	r.Use(middleware.RealIP)
@@ -28,10 +28,10 @@ func LoadRoutes() {
 	r.Get("/ping", ping)
 
 	r.Route("/author", func(r chi.Router) {
-		r.Post("/register", registerAuthorHandler)
+		r.Use(middlewares.AuthorInput)
+
+		r.Post("/register", handlers.RegisterAuthorHandler)
 	})
 
-	port := 8000
-	log.Printf("API listening on port %v", port)
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%v", port), r))
+	return r
 }
