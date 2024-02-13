@@ -1,6 +1,6 @@
 module github.com/RenatoValentim/virtual-bookstore
 
-go 1.20
+go 1.22.0
 
 require (
 	github.com/badoux/checkmail v1.2.4

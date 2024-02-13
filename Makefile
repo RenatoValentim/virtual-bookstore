@@ -1,4 +1,4 @@
-.PHONY: help run/docker test
+.PHONY: help run/docker test repl
 
 all: build/docker test
 
