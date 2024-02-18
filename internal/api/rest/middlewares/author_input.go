@@ -45,5 +45,7 @@ func AuthorInput(next http.Handler) http.Handler {
 			sendErrorResponse(w, http.StatusBadRequest, fmt.Sprintf("[Email]: %v", err.Error()))
 			return
 		}
+
+		next.ServeHTTP(w, r.WithContext(r.Context()))
 	})
 }
