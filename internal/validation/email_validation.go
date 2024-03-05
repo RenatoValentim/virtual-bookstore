@@ -16,7 +16,7 @@ func EmailValitation(email string) error {
 	if err != nil {
 		return err
 	}
-	if viper.GetString("environment") == environments.Prod {
+	if viper.GetString(environments.Environment) == environments.Prod {
 		err = checkmail.ValidateHost(email)
 		if err != nil {
 			return err

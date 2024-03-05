@@ -8,13 +8,13 @@ import (
 )
 
 func setDefaults() {
-	viper.SetDefault("environment", environments.Dev)
-	viper.SetDefault("server_host", "localhost")
-	viper.SetDefault("server_port", 8000)
-	viper.SetDefault("db_host", "localhost")
-	viper.SetDefault("db_port", 5432)
-	viper.SetDefault("db_user", "postgres")
-	viper.SetDefault("db_password", 1234)
+	viper.SetDefault(environments.Environment, environments.Dev)
+	viper.SetDefault(environments.ServerHost, "localhost")
+	viper.SetDefault(environments.ServerPort, 8000)
+	viper.SetDefault(environments.DBHost, "localhost")
+	viper.SetDefault(environments.DBPort, 5432)
+	viper.SetDefault(environments.DBUser, "postgres")
+	viper.SetDefault(environments.DBPassword, 1234)
 }
 
 func bindEnvironmentVariables() {
@@ -22,18 +22,18 @@ func bindEnvironmentVariables() {
 	viper.SetEnvPrefix("VIRTUALBOOKSTORE")
 
 	// INFO: Server Variables
-	viper.BindEnv("server_host")
-	viper.BindEnv("server_port")
+	viper.BindEnv(environments.ServerHost)
+	viper.BindEnv(environments.ServerPort)
 
 	// INFO: Databse Variables
-	viper.BindEnv("db_host")
-	viper.BindEnv("db_port")
-	viper.BindEnv("db_name")
-	viper.BindEnv("db_user")
-	viper.BindEnv("db_password")
+	viper.BindEnv(environments.DBHost)
+	viper.BindEnv(environments.DBPort)
+	viper.BindEnv(environments.DBName)
+	viper.BindEnv(environments.DBUser)
+	viper.BindEnv(environments.DBPassword)
 
 	// INFO: Running on environment
-	viper.BindEnv("environment")
+	viper.BindEnv(environments.Environment)
 }
 
 func LoadConfig() {
