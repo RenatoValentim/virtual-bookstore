@@ -1,0 +1,7 @@
+CREATE TABLE authors (
+  id UUID PRIMARY KEY,
+  name VARCHAR(250) NOT NULL,
+  email VARCHAR(250) NOT NULL,
+  description VARCHAR(400) NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL
+);

@@ -7,6 +7,8 @@ services:
       - .env
     depends_on:
       - db
+    ports:
+      - ${SERVER_PORT}:8000
 
   db:
     environment:
@@ -18,8 +20,8 @@ services:
     ports:
       - ${DB_PORT}:5432
     restart: always
-    # volumes:
-    #   - ./internal/infra/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    volumes:
+      - ./internal/db/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
     tmpfs:
       - /var/lib/postgresql/data
 

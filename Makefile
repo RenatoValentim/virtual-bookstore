@@ -13,6 +13,9 @@ help: ## Print help for each target
 	@grep '^[[:alnum:]_/]*:.* ##' $(MAKEFILE_LIST) \
 		| sort | awk 'BEGIN {FS=":.* ## "}; {printf "%-25s %s\n", $$1, $$2};'
 
+run:
+	@go run ./cmd/virtualbookstore/main.go
+
 build/docker: ## Build project with docker
 	 @DOCKER_BUILDKIT=1 docker build -t $(APP) .
 

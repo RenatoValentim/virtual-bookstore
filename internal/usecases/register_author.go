@@ -42,10 +42,13 @@ func (ra *registerAuthor) Execute(input *dto.CreateAuthorInput) error {
 	if err != nil {
 		return err
 	}
-	ra.authorData.Register(&entities.Author{
+	err = ra.authorData.Register(&entities.Author{
 		Name:        input.Name,
 		Email:       input.Email,
 		Description: input.Description,
 	})
+	if err != nil {
+		return err
+	}
 	return nil
 }
