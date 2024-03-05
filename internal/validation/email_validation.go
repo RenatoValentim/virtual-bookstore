@@ -3,6 +3,7 @@ package validation
 import (
 	"errors"
 
+	"github.com/RenatoValentim/virtual-bookstore/internal/constants/environments"
 	"github.com/badoux/checkmail"
 	"github.com/spf13/viper"
 )
@@ -15,7 +16,7 @@ func EmailValitation(email string) error {
 	if err != nil {
 		return err
 	}
-	if viper.GetString("environment") == "prod" {
+	if viper.GetString("environment") == environments.Prod {
 		err = checkmail.ValidateHost(email)
 		if err != nil {
 			return err

@@ -3,11 +3,12 @@ package config
 import (
 	"log"
 
+	"github.com/RenatoValentim/virtual-bookstore/internal/constants/environments"
 	"github.com/spf13/viper"
 )
 
 func setDefaults() {
-	viper.SetDefault("environment", "dev")
+	viper.SetDefault("environment", environments.Dev)
 	viper.SetDefault("server_host", "localhost")
 	viper.SetDefault("server_port", 8000)
 	viper.SetDefault("db_host", "localhost")
