@@ -18,7 +18,7 @@ func ping(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func LoadRoutes() *chi.Mux {
+func LoadRoutes() http.Handler {
 	r := chi.NewRouter()
 	r.Use(middleware.RequestID)
 	r.Use(middleware.RealIP)
