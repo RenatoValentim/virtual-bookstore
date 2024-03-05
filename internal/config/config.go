@@ -15,6 +15,8 @@ func setDefaults() {
 	viper.SetDefault(environments.DBPort, 5432)
 	viper.SetDefault(environments.DBUser, "postgres")
 	viper.SetDefault(environments.DBPassword, 1234)
+	viper.SetDefault(environments.DBTimeZone, "America/Sao_Paulo")
+	viper.SetDefault(environments.DBSSLMode, "disable")
 }
 
 func bindEnvironmentVariables() {
@@ -31,6 +33,8 @@ func bindEnvironmentVariables() {
 	viper.BindEnv(environments.DBName)
 	viper.BindEnv(environments.DBUser)
 	viper.BindEnv(environments.DBPassword)
+	viper.BindEnv(environments.DBTimeZone)
+	viper.BindEnv(environments.DBSSLMode)
 
 	// INFO: Running on environment
 	viper.BindEnv(environments.Environment)

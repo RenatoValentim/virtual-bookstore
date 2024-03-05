@@ -18,12 +18,14 @@ type authorDataPostgres struct {
 
 func NewAuthorDataPostgres() (*authorDataPostgres, error) {
 	dsn := fmt.Sprintf(
-		`host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=America/Sao_Paulo`,
+		`host=%s user=%s password=%s dbname=%s port=%s sslmode=%s TimeZone=%s`,
 		viper.GetString(environments.DBHost),
 		viper.GetString(environments.DBUser),
 		viper.GetString(environments.DBPassword),
 		viper.GetString(environments.DBName),
 		viper.GetString(environments.DBPort),
+		viper.GetString(environments.DBSSLMode),
+		viper.GetString(environments.DBTimeZone),
 	)
 	db, err := sql.Open("postgres", dsn)
 

@@ -11,4 +11,6 @@ const (
 	DBUser      = "db_user"
 	DBPassword  = "db_password"
 	DBName      = "db_name"
+	DBTimeZone  = "db_time_zone"
+	DBSSLMode   = "db_ssl_mode"
 )
