@@ -5,7 +5,6 @@ import (
 	"net/http"
 
 	"github.com/RenatoValentim/virtual-bookstore/internal/api/rest/handlers"
-	"github.com/RenatoValentim/virtual-bookstore/internal/api/rest/middlewares"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 )
@@ -28,8 +27,6 @@ func LoadRoutes() http.Handler {
 	r.Get("/ping", ping)
 
 	r.Route("/author", func(r chi.Router) {
-		r.Use(middlewares.AuthorInput)
-
 		r.Post("/register", handlers.RegisterAuthorHandler)
 	})
 

@@ -9,6 +9,7 @@ import (
 	"github.com/RenatoValentim/virtual-bookstore/internal/constants/environments"
 	"github.com/RenatoValentim/virtual-bookstore/internal/entities"
 	"github.com/google/uuid"
+	_ "github.com/lib/pq"
 	"github.com/spf13/viper"
 )
 
@@ -42,12 +43,10 @@ func (adp *authorDataPostgres) Register(author *entities.Author) error {
 	author.ID = uuid.New()
 	author.CreatedAt = time.Now().Format(time.RFC3339)
 
-	rows, err := adp.db.Exec(`
+	_, err := adp.db.Exec(`
 		INSERT INTO authors (id, name, email, description, created_at) VALUES ($1, $2, $3, $4, $5)
 	`, author.ID, author.Name, author.Email, author.Description, author.CreatedAt,
 	)
-	fmt.Printf("err: %v\n", err)
-	fmt.Printf("rows: %v\n", rows)
 
 	if err != nil {
 		return err

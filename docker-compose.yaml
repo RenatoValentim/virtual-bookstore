@@ -11,6 +11,7 @@ services:
       - ${SERVER_PORT}:8000
 
   db:
+    container_name: virtualbookstore-db
     environment:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_USER=${DB_USER}
@@ -34,6 +35,3 @@ services:
       - ${SGBD_HOST_PORT}:8080
 
 version: '3.15'
-
-volumes:
-  data:
